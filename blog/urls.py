@@ -15,6 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework.documentation import include_docs_urls
+from rest_framework.schemas import get_schema_view
+
+
+API_TITLE = 'Simple Blog API'
+API_DESCRIPTION = 'A Web API created with Django REST Framework.'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -22,4 +28,7 @@ urlpatterns = [
     path('api/auth/', include('rest_framework.urls')),
     path('api/ver1/rest-auth/', include('rest_auth.urls')),
     path('api/ver1/rest-auth/registration/', include('rest_auth.registration.urls')),
+
+    path('api/schema/', get_schema_view(title=API_TITLE)),
+    path('api/docs/', include_docs_urls(title=API_TITLE, description=API_DESCRIPTION)),
 ]
